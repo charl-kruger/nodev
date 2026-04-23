@@ -1,0 +1,17 @@
+{
+  "name": "charl",
+  "version": "0.1.0",
+  "description": "Skill for planning and reviewing safe production delivery of AI-authored Cloudflare changes on Cloudflare",
+  "author": {
+    "name": "Charl Kruger"
+  },
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "ai",
+    "agent-skills",
+    "rollout",
+    "observability",
+    "security"
+  ]
+}

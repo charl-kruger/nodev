@@ -1,0 +1,14 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "charl",
+  "owner": {
+    "name": "Charl Kruger"
+  },
+  "plugins": [
+    {
+      "name": "charl",
+      "source": "./",
+      "description": "Skill for planning and reviewing safe production delivery of AI-authored Cloudflare changes on Cloudflare"
+    }
+  ]
+}
