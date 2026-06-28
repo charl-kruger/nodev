@@ -1,6 +1,6 @@
 # Cloudflare Audit (April 23, 2026)
 
-This is the source-backed Cloudflare product audit behind the current `charl`
+This is the source-backed Cloudflare product audit behind the current `nodev`
 recommendations.
 
 The question was not "what is fashionable on Cloudflare right now?" It was:
@@ -37,7 +37,7 @@ The important catches are equally material:
 
 Implication:
 
-- `charl` should recommend preview-first delivery, but never pretend preview is
+- `nodev` should recommend preview-first delivery, but never pretend preview is
   enough by itself for Durable Objects or observability-heavy checks.
 
 ### 2. Flagship Is The Right Exposure Primitive
@@ -56,7 +56,7 @@ What matters:
 
 Implication:
 
-- `charl` should prefer dark launch plus explicit flag evaluation over naive
+- `nodev` should prefer dark launch plus explicit flag evaluation over naive
   percentage deployment when the goal is safe rollout.
 
 ### 3. Browser Run Is Now A Real Verification Surface
@@ -77,7 +77,7 @@ The catches matter:
 
 Implication:
 
-- `charl` should treat Browser Run as the preferred UI verification path, but it
+- `nodev` should treat Browser Run as the preferred UI verification path, but it
   should not assume replay exists unless recording was explicitly enabled.
 
 ### 4. AI Gateway Has Become A Real Control Plane
@@ -100,7 +100,7 @@ The important catch:
 
 Implication:
 
-- if retention policy matters, `charl` should fail closed on unsupported
+- if retention policy matters, `nodev` should fail closed on unsupported
   providers instead of treating Cloudflare's downgrade behavior as good enough.
 
 ### 5. Dynamic Workers And Sandbox Are Different Tools
@@ -131,7 +131,7 @@ Sandbox also got materially stronger for real agent systems:
 
 Implication:
 
-- `charl` should stop treating Sandbox as the universal answer for all
+- `nodev` should stop treating Sandbox as the universal answer for all
   generated-code tasks.
 
 ### 6. Agents SDK Direction Matters
@@ -147,7 +147,7 @@ model:
 
 Implication:
 
-- `charl` should prefer durable, stateful agent architectures for serious remote
+- `nodev` should prefer durable, stateful agent architectures for serious remote
   operators instead of request-bound agent loops.
 
 ### 7. Access MCP Portals Are Now The Best Front Door For Internal Tools
@@ -162,10 +162,10 @@ governed MCP:
 
 Implication:
 
-- `charl` should recommend Access-governed MCP access for sensitive internal
+- `nodev` should recommend Access-governed MCP access for sensitive internal
   systems instead of sprawling unmanaged local MCP setups.
 
-## What Charl Now Recommends By Default
+## What Nodev Now Recommends By Default
 
 For most "build in prod safely" scenarios, the current default answer is:
 
@@ -182,7 +182,7 @@ For most "build in prod safely" scenarios, the current default answer is:
 11. Require telemetry, rollback notes, and a named promotion owner before
     widening production exposure
 
-## What Charl Should Refuse To Assume
+## What Nodev Should Refuse To Assume
 
 - That Preview URLs are enough for Durable Object apps
 - That Preview URLs provide logs

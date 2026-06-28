@@ -1,4 +1,4 @@
-# Charl
+# Nodev
 
 AI makes software much cheaper to write.
 
@@ -8,7 +8,7 @@ That gap is where most teams get stuck. They do not mainly lack code
 generation. They lack confidence, legibility, release discipline, and a clean
 way to say "yes, this can go live" or "no, this must stop here."
 
-`charl` exists to close that gap.
+`nodev` exists to close that gap.
 
 It is an Agent Skill for building and shipping on Cloudflare with AI without
 confusing implementation speed for production safety. It helps a human on a
@@ -17,7 +17,7 @@ the same question in a disciplined way:
 
 `What is safe to do next, with the authority and evidence we actually have?`
 
-## Why Use Charl
+## Why Use Nodev
 
 Most AI coding workflows fail in one of two ways:
 
@@ -26,7 +26,7 @@ Most AI coding workflows fail in one of two ways:
 - They become reckless and theatrical, where code moves fast but responsibility
   disappears.
 
-`charl` is designed to avoid both.
+`nodev` is designed to avoid both.
 
 It reframes the job from "Did the AI write good code?" to:
 
@@ -42,14 +42,25 @@ helps a team trust the build path.
 
 Read more:
 
-- [Why Charl Exists](./docs/why-charl.md)
-- [What Charl Does](./docs/what-charl-does.md)
+- [Why Nodev Exists](./docs/why-nodev.md)
+- [What Nodev Does](./docs/what-nodev-does.md)
 - [Recommended Cloudflare Stack (April 2026)](./docs/cloudflare-stack-2026.md)
 - [Cloudflare Audit (April 23, 2026)](./docs/cloudflare-audit-2026-04-23.md)
 
-## What Charl Does
+## New In This Version
 
-`charl` gives an agent a repeatable operating model for safe Cloudflare
+- Reference routing before final recommendations
+- Planning-only posture when execution mode is unknown
+- Evidence ledger for evidence, assumptions, blockers, and recommendations
+- Fail-closed scenarios for missing authority, preview, telemetry, rollback,
+  token scope, ZDR, and Browser Run recordings
+- Source freshness protocol for current Cloudflare claims
+- Golden cases for behavior validation
+- Codex `AGENTS.md` guidance and local validation
+
+## What Nodev Does
+
+`nodev` gives an agent a repeatable operating model for safe Cloudflare
 delivery. In practice, it makes the agent do six things before it pretends a
 deployment is safe:
 
@@ -73,7 +84,7 @@ That means the skill is useful both before code exists and after code exists:
 
 Read more:
 
-- [What Charl Does](./docs/what-charl-does.md)
+- [What Nodev Does](./docs/what-nodev-does.md)
 - [Operating Modes](./docs/operating-modes.md)
 - [Common Workflows](./docs/common-workflows.md)
 - [Recommended Cloudflare Stack (April 2026)](./docs/cloudflare-stack-2026.md)
@@ -99,21 +110,21 @@ npx skills add https://github.com/charl-kruger/skills
 Install the skill by name:
 
 ```bash
-npx skills add https://github.com/charl-kruger/skills --skill charl
+npx skills add https://github.com/charl-kruger/skills --skill nodev
 ```
 
 Manual project-level install:
 
 ```bash
 mkdir -p /path/to/project/.agents/skills
-cp -R skills/charl /path/to/project/.agents/skills/
+cp -R skills/nodev /path/to/project/.agents/skills/
 ```
 
 Manual OpenAI Codex global install:
 
 ```bash
 mkdir -p ~/.codex/skills
-cp -R skills/charl ~/.codex/skills/
+cp -R skills/nodev ~/.codex/skills/
 ```
 
 For other agents, use `npx skills` or the client’s own skills directory docs.
@@ -122,32 +133,55 @@ For other agents, use `npx skills` or the client’s own skills directory docs.
 
 Direct skill invocation examples:
 
-- "Use `$charl` to review this Cloudflare rollout plan before production."
-- "Use `$charl` to classify this AI-authored feature by risk tier and blast
+- "Use `$nodev` to review this Cloudflare rollout plan before production."
+- "Use `$nodev` to classify this AI-authored feature by risk tier and blast
   radius."
-- "Use `$charl` to tell me whether an autonomous remote agent should be allowed
+- "Use `$nodev` to tell me whether an autonomous remote agent should be allowed
   to deploy this change."
-- "Use `$charl` to design a safe preview, dark launch, and rollback path for a
+- "Use `$nodev` to design a safe preview, dark launch, and rollback path for a
   new Workers feature."
+
+Best prompt for Codex:
+
+```text
+Use $nodev to review this Cloudflare change.
+Operator:
+- mode:
+- repo access:
+- Cloudflare token scope:
+- preview path:
+- logs/metrics/traces:
+- rollback path:
+- production promotion owner:
+
+Change:
+- goal:
+- files/surfaces:
+- data touched:
+- auth/billing/tenancy touched:
+- user-facing path:
+
+Return a release decision with evidence, assumptions, blockers, and handoff.
+```
 
 If you use Claude Code and have this repo available locally, you can also use
 the project command:
 
 ```text
-/charl [feature, change, system, or rollout to analyze]
+/nodev [feature, change, system, or rollout to analyze]
 ```
 
 Important:
 
 - The skill itself installs with `npx skills`.
-- The `/charl` command is a repo-local Claude Code command defined in
-  [`.claude/commands/charl.md`](./.claude/commands/charl.md). It is useful when
+- The `/nodev` command is a repo-local Claude Code command defined in
+  [`.claude/commands/nodev.md`](./.claude/commands/nodev.md). It is useful when
   working directly in this repository or when you copy the command into another
   Claude Code project.
 
 Read more:
 
-- [How To Use Charl](./docs/how-to-use-charl.md)
+- [How To Use Nodev](./docs/how-to-use-nodev.md)
 - [Operating Modes](./docs/operating-modes.md)
 - [Common Workflows](./docs/common-workflows.md)
 - [Recommended Cloudflare Stack (April 2026)](./docs/cloudflare-stack-2026.md)
@@ -157,9 +191,9 @@ Read more:
 
 Start here if you are new:
 
-- [Why Charl Exists](./docs/why-charl.md)
-- [What Charl Does](./docs/what-charl-does.md)
-- [How To Use Charl](./docs/how-to-use-charl.md)
+- [Why Nodev Exists](./docs/why-nodev.md)
+- [What Nodev Does](./docs/what-nodev-does.md)
+- [How To Use Nodev](./docs/how-to-use-nodev.md)
 - [Operating Modes](./docs/operating-modes.md)
 - [Common Workflows](./docs/common-workflows.md)
 - [Recommended Cloudflare Stack (April 2026)](./docs/cloudflare-stack-2026.md)
@@ -167,15 +201,19 @@ Start here if you are new:
 
 Internal skill and command files:
 
-- [skills/charl/SKILL.md](./skills/charl/SKILL.md)
-- [skills/charl/references/playbook.md](./skills/charl/references/playbook.md)
-- [skills/charl/references/cloudflare-tooling.md](./skills/charl/references/cloudflare-tooling.md)
-- [commands/charl.md](./commands/charl.md)
-- [`.claude/commands/charl.md`](./.claude/commands/charl.md)
+- [skills/nodev/SKILL.md](./skills/nodev/SKILL.md)
+- [skills/nodev/references/playbook.md](./skills/nodev/references/playbook.md)
+- [skills/nodev/references/cloudflare-tooling.md](./skills/nodev/references/cloudflare-tooling.md)
+- [skills/nodev/references/evidence-ledger.md](./skills/nodev/references/evidence-ledger.md)
+- [skills/nodev/references/fail-closed-scenarios.md](./skills/nodev/references/fail-closed-scenarios.md)
+- [skills/nodev/references/source-freshness.md](./skills/nodev/references/source-freshness.md)
+- [skills/nodev/examples/golden-cases.md](./skills/nodev/examples/golden-cases.md)
+- [commands/nodev.md](./commands/nodev.md)
+- [`.claude/commands/nodev.md`](./.claude/commands/nodev.md)
 
 ## Repository Layout
 
-- [`skills/charl/`](./skills/charl/)
+- [`skills/nodev/`](./skills/nodev/)
 - [`docs/`](./docs/)
 - [`commands/`](./commands/)
 - [`.claude/commands/`](./.claude/commands/)

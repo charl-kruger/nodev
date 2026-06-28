@@ -1,4 +1,0 @@
-interface:
-  display_name: "Charl"
-  short_description: "Ship AI-authored Cloudflare changes safely"
-  default_prompt: "Use $charl to design or review a safe Cloudflare rollout for an AI-authored feature."

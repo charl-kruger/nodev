@@ -1,0 +1,7 @@
+{
+  "name": "nodev-skill",
+  "private": true,
+  "scripts": {
+    "validate:nodev": "node scripts/validate-nodev-skill.mjs"
+  }
+}

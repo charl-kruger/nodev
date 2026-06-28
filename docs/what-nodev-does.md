@@ -1,14 +1,28 @@
-# What Charl Does
+# What Nodev Does
 
-`charl` is a Cloudflare-focused delivery governance skill for AI-authored
+`nodev` is a Cloudflare-focused delivery governance skill for AI-authored
 software changes and AI-powered products.
 
 It is not a generic coding helper. It is a decision framework that tells an
 agent what it can safely do next.
 
+## New In This Version
+
+Nodev now behaves more like a production safety system than a static prompt:
+
+- It routes to detailed references only when their trigger applies.
+- It can continue planning when execution mode is unknown, while blocking
+  implementation, deployment, and production promotion.
+- It records evidence, assumptions, blockers, and recommendations separately.
+- It maps common missing-capability cases to planning-only, preview-only,
+  handoff, or hard block outcomes.
+- It requires current Cloudflare claims to use the April 23, 2026 local
+  snapshot date or fresh official Cloudflare verification.
+- It includes golden cases for behavior validation.
+
 ## The Job Of The Skill
 
-When `charl` is invoked, it is supposed to do these things in order:
+When `nodev` is invoked, it is supposed to do these things in order:
 
 1. Detect the execution mode
 2. Check capabilities and authority
@@ -20,7 +34,7 @@ When `charl` is invoked, it is supposed to do these things in order:
 That sequence is the value of the skill. It prevents an agent from jumping
 directly from "I can write code" to "therefore I should deploy code."
 
-## What Charl Produces
+## What Nodev Produces
 
 The skill’s default output shape is:
 
@@ -31,6 +45,7 @@ The skill’s default output shape is:
 - Required Cloudflare controls
 - Verification gates
 - Rollout and rollback
+- Evidence ledger
 - Open risks
 - Handoff
 
@@ -40,11 +55,11 @@ This is intentional. It keeps the result useful whether the next actor is:
 - an agent implementing the plan
 - an autonomous operator deciding whether it is allowed to continue
 
-## What Charl Evaluates
+## What Nodev Evaluates
 
 ### Execution Mode
 
-`charl` makes the operator type explicit:
+`nodev` makes the operator type explicit:
 
 - `human-local`
 - `human-remote`
@@ -65,11 +80,15 @@ Before implementation or promotion, the skill expects answers to questions like:
 - Is there a real secret source?
 - Who owns production promotion?
 
-If the answer is unclear, `charl` is supposed to fail closed.
+If the answer is unclear, `nodev` is supposed to fail closed.
+
+For planning, review, architecture, or policy work, an unknown mode may produce
+a planning-only answer. That posture does not authorize implementation,
+deployment, production promotion, or expanded authority.
 
 ### Risk Tier
 
-`charl` separates work into four tiers:
+`nodev` separates work into four tiers:
 
 - `Tier 0`: throwaway, internal, or prototype work
 - `Tier 1`: bounded and low-risk work
@@ -98,14 +117,26 @@ The skill maps the change to the smallest useful control set:
 
 This is one of the most important parts of the skill.
 
-If the current operator cannot safely continue, `charl` is supposed to return a
+If the current operator cannot safely continue, `nodev` is supposed to return a
 usable handoff package instead of bluffing through the missing capability.
 
 That is what makes it suitable for both humans and autonomous agents.
 
-## What Charl Does Not Do
+### Evidence Ledger
 
-`charl` does not guarantee correctness.
+For Tier 1+ work, remote/autonomous operators, production exposure, or any
+recommendation that says work may continue, `nodev` distinguishes:
+
+- evidence
+- assumptions
+- blockers
+- recommendations
+
+That makes release recommendations auditable instead of rhetorical.
+
+## What Nodev Does Not Do
+
+`nodev` does not guarantee correctness.
 
 It does not replace:
 
@@ -119,6 +150,6 @@ It is a release-governance skill, not magic.
 
 Next:
 
-- [How To Use Charl](./how-to-use-charl.md)
+- [How To Use Nodev](./how-to-use-nodev.md)
 - [Operating Modes](./operating-modes.md)
 - [Common Workflows](./common-workflows.md)

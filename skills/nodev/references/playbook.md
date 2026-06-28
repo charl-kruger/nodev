@@ -43,8 +43,11 @@ Make the operating mode explicit before work starts:
 | `autonomous-remote` | Unattended sandbox or remote VM | Policy-defined | Agent can build, test, preview, and prepare release; promotion is constrained |
 | `autonomous-deployer` | Unattended environment with explicit deploy rights | Policy-defined | Agent may promote only if authority, evidence, and rollback all exist |
 
-If the mode is not known, the correct action is to stop and ask for that
-information or report it as a blocker.
+If the mode is not known, planning, review, architecture, and policy work may
+continue in `planning-only` posture. Mark the execution mode as unknown, assume
+no production promotion authority, and list the minimum facts needed before
+implementation or deployment can proceed. Implementation, deployment,
+production promotion, and authority-expanding actions remain blocked.
 
 ## Capability Check
 
@@ -60,6 +63,10 @@ Run this check before implementation or release:
 - Promotion authority: who is allowed to widen production exposure?
 
 If any required capability is missing, fail closed.
+
+For Tier 1+ release work, remote/autonomous operators, production exposure, or
+any recommendation that says work may continue, record evidence, assumptions,
+blockers, and recommendations separately.
 
 ## What to Preserve From the Source Material
 

@@ -1,10 +1,10 @@
-# Why Charl Exists
+# Why Nodev Exists
 
 AI has changed the economics of writing software.
 
 It has not changed the economics of blame.
 
-That is the real problem `charl` solves.
+That is the real problem `nodev` solves.
 
 Most teams do not need one more model telling them it can build a feature.
 Their actual bottleneck is different:
@@ -20,7 +20,7 @@ So they get stuck in one of two bad equilibria:
 - `Overconfidence`: the team ships because the AI made it feel easy, not because
   the release path was actually safe.
 
-`charl` is designed to break that trap.
+`nodev` is designed to break that trap.
 
 It gives an agent a disciplined way to make AI-assisted delivery feel
 operationally boring in the best possible sense:
@@ -35,14 +35,14 @@ operationally boring in the best possible sense:
 That matters because the most valuable thing a production skill can do is not
 simply generate more output. It can reduce organizational doubt.
 
-When a team uses `charl`, the benefit is not just speed. It is a different kind
+When a team uses `nodev`, the benefit is not just speed. It is a different kind
 of speed:
 
 - speed that still feels legible
 - speed that still has ownership
 - speed that still has brakes
 
-In plain terms, `charl` helps turn:
+In plain terms, `nodev` helps turn:
 
 - "The AI says it is ready"
 
@@ -55,7 +55,7 @@ That is a much more useful sentence.
 
 ## The Core Reframe
 
-`charl` treats code generation as the cheap part and release judgment as the
+`nodev` treats code generation as the cheap part and release judgment as the
 expensive part.
 
 That changes the conversation from:
@@ -73,12 +73,12 @@ to:
 
 Plenty of AI prompts try to make agents bolder.
 
-`charl` tries to make them more governable.
+`nodev` tries to make them more governable.
 
 That is the whole point.
 
 Next:
 
-- [What Charl Does](./what-charl-does.md)
+- [What Nodev Does](./what-nodev-does.md)
 - [Operating Modes](./operating-modes.md)
 - [Common Workflows](./common-workflows.md)

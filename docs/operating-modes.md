@@ -1,10 +1,20 @@
 # Operating Modes
 
-`charl` is built around one simple rule:
+`nodev` is built around one simple rule:
 
 The same change is not equally safe in every environment.
 
 That is why the skill starts by detecting the execution mode.
+
+## New In This Version
+
+- Unknown mode no longer stalls planning, review, architecture, or policy work.
+- Unknown mode still blocks implementation, deployment, production promotion,
+  and authority-expanding actions.
+- Release recommendations must separate evidence, assumptions, blockers, and
+  recommendations.
+- Current Cloudflare product behavior must use the local snapshot date or be
+  verified against official Cloudflare sources.
 
 ## The Four Modes
 
@@ -78,7 +88,7 @@ Default stance:
 
 ## Capability Check
 
-Before trusting the current mode, `charl` expects a capability check:
+Before trusting the current mode, `nodev` expects a capability check:
 
 - repo read/write access
 - Cloudflare authentication with minimum required scope
@@ -101,7 +111,7 @@ Teams start acting as if:
 - preview and production are morally interchangeable
 - missing authority can be worked around with confidence
 
-That is exactly what `charl` is trying to prevent.
+That is exactly what `nodev` is trying to prevent.
 
 ## Practical Rule
 
@@ -110,8 +120,12 @@ do.
 
 That means you do not yet know whether the change is safe to release.
 
+For planning-only work, Nodev may still return a conservative plan. That plan
+must name the unknown mode, assume no production promotion authority, and list
+the facts needed before implementation or deployment can proceed.
+
 Next:
 
 - [Common Workflows](./common-workflows.md)
-- [How To Use Charl](./how-to-use-charl.md)
-- [What Charl Does](./what-charl-does.md)
+- [How To Use Nodev](./how-to-use-nodev.md)
+- [What Nodev Does](./what-nodev-does.md)

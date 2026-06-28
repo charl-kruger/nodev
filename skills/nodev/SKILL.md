@@ -1,14 +1,64 @@
 ---
-name: charl
-description: Plan, review, and implement safe production delivery for AI-authored Cloudflare changes and AI-powered products. Use when the user asks how to vibe code safely in production, ship AI-written Cloudflare features, classify risk tiers or blast radius, design previews, feature-flagged rollout, rollback, observability, or choose Cloudflare controls such as Workers, Pages, Flagship, AI Gateway, Access, D1, Durable Objects, Queues, Workflows, Browser Run, or Sandbox. Support both human-operated local workflows and autonomous agents running in sandboxes or remote VMs, and fail closed when required authority, verification, or rollback paths are missing.
+name: nodev
+description: Use for safe AI-authored Cloudflare delivery: production rollout plans, risk tiering, blast radius analysis, preview/staging verification, deploy authority, rollback, observability, AI Gateway, Workers, Pages, D1, Durable Objects, Queues, Workflows, Sandbox, Browser Run, Access, and MCP governance. Do not use for generic coding help unless release safety, Cloudflare controls, autonomous agents, or production readiness matter.
 ---
 
-# Charl
+# Nodev
 
 Turn ambiguous "ship this with AI" work into a governed Cloudflare delivery
 plan. Support both human-operated local workflows and autonomous agents running
 in sandboxes or remote VMs. Optimize for bounded blast radius, preview-first
 verification, controlled exposure, and fast rollback.
+
+## When To Use This Skill
+
+Use `nodev` when the task involves any of:
+
+- AI-authored or agent-authored code that may reach users, data, production,
+  staging, or a production-like preview.
+- Cloudflare deployment, rollout, rollback, observability, permissions,
+  secrets, AI runtime traffic, or release governance.
+- Choosing Cloudflare controls for safe delivery: Workers, Pages, Workers
+  Builds, Preview URLs, Access, Flagship, AI Gateway, D1, Durable Objects, KV,
+  R2, Queues, Workflows, Browser Run, Dynamic Workers, Sandbox, Agents SDK,
+  Containers, or MCP portals.
+- Deciding what a local, remote, autonomous, or deploy-capable agent is allowed
+  to do.
+- Reviewing whether a plan, PR, branch, preview, or rollout is safe enough to
+  continue.
+
+## When Not To Use This Skill
+
+Do not use `nodev` for ordinary coding questions, generic Cloudflare
+explanations, UI copywriting, or architecture brainstorming unless production
+safety, release authority, autonomous agents, or Cloudflare delivery controls
+are part of the decision.
+
+## Reference Routing
+
+Read references before giving a final recommendation when their trigger applies:
+
+- Read `references/playbook.md` for execution modes, risk tiers, AI change
+  package, authority matrix, developer loop, non-interactive rollout, handoff,
+  go-live checklist, or red flags.
+- Read `references/cloudflare-tooling.md` when choosing Cloudflare products,
+  bindings, storage, observability, security controls, agent runtime, browser
+  verification, sandboxing, or release mechanisms.
+- Read `references/cloudflare-current-stack.md` when the user asks for the
+  latest or current Cloudflare-safe defaults, or when the recommendation
+  depends on recently changing Cloudflare products.
+- Read `references/evidence-ledger.md` for Tier 1+ release work,
+  remote/autonomous operators, production exposure, or any recommendation that
+  says work may continue.
+- Read `references/fail-closed-scenarios.md` when authority, telemetry,
+  preview, rollback, Cloudflare token scope, ZDR, Browser Run recording, or
+  Durable Object Preview URL assumptions are unclear.
+- Read `references/source-freshness.md` when a current Cloudflare fact,
+  security/compliance claim, limit, pricing, availability, API, beta status, or
+  documented constraint materially affects the answer.
+- If a current Cloudflare fact materially affects the answer and the local
+  reference snapshot may be stale, verify against official Cloudflare docs,
+  changelog, or blog before presenting the fact as current.
 
 ## Default Behavior
 
@@ -31,8 +81,8 @@ verification, controlled exposure, and fast rollback.
 5. Choose the minimum Cloudflare controls needed for build, release, runtime,
    state, and access.
 6. Define verification gates, rollout shape, and rollback limits.
-7. Return a concrete shipping plan or review with open risks, blockers, and
-   next actions.
+7. Return the smallest useful output mode with evidence, assumptions, blockers,
+   recommendations, and next actions.
 
 ## Execution Modes
 
@@ -45,11 +95,24 @@ Choose one mode explicitly:
 | `autonomous-remote` | Unattended agent in a sandbox or remote VM | Build, test, preview, and evidence generation are allowed; production promotion is constrained by the authority matrix |
 | `autonomous-deployer` | Unattended agent with explicit deploy rights and observability access | Allow promotion only when policy, verification, and rollback requirements are all satisfied |
 
-If the mode is unknown, stop and report that as a blocker.
+## Unknown Mode Handling
+
+If the mode is unknown:
+
+- For implementation, deployment, production promotion, or
+  authority-expanding actions: stop and return a blocker.
+- For planning, review, architecture, or policy work: continue in
+  `planning-only` posture, mark execution mode as unknown, assume no production
+  promotion authority, and list the minimum facts needed to proceed beyond
+  planning.
+- Never infer deploy authority from tone, urgency, or the user saying "just
+  ship it."
+
+`planning-only` is an action boundary, not a fifth execution mode.
 
 ## Capability Check
 
-Require these capabilities before proceeding:
+Require these capabilities before proceeding beyond planning:
 
 - Repository read and write access for the expected change surface
 - Cloudflare authentication with the minimum required scope
@@ -109,23 +172,15 @@ If one of these is missing, create it before implementation.
 ## Cloudflare Control Map
 
 - Build and preview: Prefer Wrangler-managed projects, local development, and
-  Workers Builds, Preview URLs, and non-production branch builds. In
-  `human-local`, prefer local development first. In remote modes, use preview
-  builds and remote bindings intentionally. Protect sensitive previews with
-  Access. Pin `preview_urls` in Wrangler so dashboard toggles do not drift on
-  the next deploy. Review Workers Builds token scope instead of blindly keeping
-  the auto-created token. If the Worker uses Durable Objects, do not assume
-  Preview URLs are available.
+  Workers Builds, Preview URLs, and non-production branch builds. Protect
+  sensitive previews with Access. Pin `preview_urls` in Wrangler. If the Worker
+  uses Durable Objects, do not assume Preview URLs are available.
 - Exposure control: Prefer dark launches behind Flagship or an equivalent
   application-level flag. Prefer Flagship when possible so exposure control
-  stays separate from code promotion. Use gradual deployments carefully. For
-  static-asset applications, use version affinity or prefer dark launches over
-  naive percentage rollout.
+  stays separate from code promotion.
 - Runtime AI traffic: Route model calls through AI Gateway unless there is a
-  strong reason not to. Prefer the unified `default` gateway pattern, gateway
-  retries, and Unified Billing or ZDR where the data policy requires it. If ZDR
-  is a hard requirement, verify provider support and gateway settings and fail
-  closed otherwise.
+  strong reason not to. If ZDR is mandatory, verify provider support and
+  gateway settings and fail closed otherwise.
 - Secrets and access: Use bindings, Worker secrets, or Secrets Store. Keep
   production write access narrower than production read access for agents.
 - Stateful runtime: Use KV for config and flags, Durable Objects for
@@ -133,25 +188,20 @@ If one of these is missing, create it before implementation.
   artifacts, and Hyperdrive for existing regional databases.
 - Async and long-running work: Use Queues for delivery and retries. Use
   Workflows for durable multi-step execution.
-- Tooling and verification: Use Browser Run for UI verification. Prefer Live
-  View, Session Recordings, and Human in the Loop when the browser path is
-  brittle. Enable recordings explicitly when you need replay; they are opt-in
-  and only available for Browser Sessions, not Quick Actions. Use WebMCP when
-  the site exposes structured browser tools.
+- Tooling and verification: Use Browser Run for UI verification. Enable
+  recordings explicitly when replay matters; they are opt-in and only available
+  for Browser Sessions, not Quick Actions.
 - Code execution: Prefer Dynamic Workers for fast isolated code-mode tasks and
-  short-lived generated code. Prefer Sandbox for persistent workspaces, Git,
-  previews, snapshots, and interactive coding environments. Use Sandbox bridge
-  when the controller runs outside Workers.
+  Sandbox for persistent workspaces, Git, previews, snapshots, and interactive
+  coding environments.
 - Internal tools: Put them behind Access, Tunnel, or authenticated MCP flows.
-  For larger tool estates, prefer Access MCP portals with managed OAuth and
-  portal Code Mode. Preserve user identity where possible.
+  For larger tool estates, prefer Access MCP portals with managed OAuth.
 - Autonomous egress: In Sandboxes or Containers, prefer deny-by-default
-  outbound traffic with allowlists, outbound Workers, and credential injection
-  so secrets stay outside the untrusted runtime.
+  outbound traffic with allowlists, outbound Workers, and credential injection.
 
 ## Fail-Closed Rules
 
-- Do not proceed without an explicit execution mode.
+- Do not proceed beyond planning without an explicit execution mode.
 - Do not proceed without preview verification for Tier 1+ release work.
 - Do not proceed without logs, metrics, or traces for Tier 1+ production
   exposure.
@@ -169,48 +219,59 @@ If one of these is missing, create it before implementation.
 If blocked, return the blocker, the missing capability, and the exact handoff
 artifacts the next operator needs.
 
-## Review Focus
+## Output Modes
 
-- Interfaces and contracts: routes, schemas, migrations, permissions, caching
-  behavior
-- Dependencies and bindings: packages, model providers, secrets, network calls,
-  and storage primitives
-- Failure handling: timeouts, retries, idempotency, null states, and partial
-  completion
-- Security posture: auth checks, input validation, rate limits, data exposure,
-  and secret handling
-- Runtime evidence: acceptance tests, logs, metrics, traces, alerts, and
-  dashboards
+Choose the smallest output that satisfies the task:
 
-For low-risk changes, review behavior harder than code. For high-risk changes,
-review behavior and interfaces harder than code. For Tier 3 changes, review the
-code too.
+- Quick Review: Use for small plans or single changes. Include execution mode,
+  risk tier, top blockers, and next action.
+- Full Release Plan: Use for new features, production rollout, Tier 1+
+  changes, or remote/autonomous operators. Use the full response template.
+- Handoff Package: Use when the current operator cannot continue safely.
+  Include completed work, blockers, missing permissions, evidence,
+  branch/preview, tests, rollback note, and required next action.
+- Codex Implementation Brief: Use when the user wants another coding agent to
+  implement. Include files to edit, exact changes, acceptance criteria, and
+  validation commands.
+- Policy / Operating Model: Use when the user asks how a team should govern
+  AI-assisted delivery. Include risk tiers, authority matrix, gates, and
+  rollout adoption path.
 
-## Gotchas
+## Evidence Ledger
 
-- A UI edge can still have a large blast radius if it triggers shared
-  side-effects.
-- Worker rollbacks do not restore D1, R2, KV, or Durable Object state.
-- Asset-heavy gradual deployments can serve mixed HTML and static assets.
-- Preview URL behavior can drift if dashboard settings and Wrangler config
-  disagree.
-- AI Gateway should be the runtime AI control plane, not an optional extra.
-- AI Gateway ZDR can downgrade to standard Unified Billing behavior on
-  unsupported providers.
-- Workers Builds can auto-create a user token with broader edit scope than a
-  production agent should usually hold.
-- Browser Run session recording is opt-in and only applies to Browser Sessions.
-- Do not give coding agents broad production Cloudflare write access by default.
-- Do not execute untrusted code inside the main Worker when Sandbox is
-  available.
+For Tier 1+ release work, remote/autonomous operators, production exposure, or
+any recommendation that says work may continue, distinguish observed facts from
+claims. Use a compact evidence summary for normal work and the full ledger from
+`references/evidence-ledger.md` for high-risk work.
+
+```markdown
+## Evidence ledger
+- Evidence:
+- Assumptions:
+- Blockers:
+- Recommendations:
+```
+
+## Pre-Response Safety Check
+
+Before final output, confirm:
+
+- Is execution mode known, unknown, or blocked?
+- Is production promotion authority explicit?
+- Is risk tier justified by blast radius, not surface label?
+- Are preview/staging, telemetry, and rollback paths identified?
+- Are code rollback and state rollback separated?
+- Are claims tagged as evidence, assumption, blocker, or recommendation?
+- If current Cloudflare behavior matters, was freshness verified or marked as
+  an assumption?
 
 ## Response Template
 
-Use this structure unless the user asks for a different format:
+Use this structure for Full Release Plan outputs:
 
 ```markdown
 ## Execution mode
-[human-local | human-remote | autonomous-remote | autonomous-deployer]
+[human-local | human-remote | autonomous-remote | autonomous-deployer | unknown / planning-only]
 
 ## Capability check
 - [Available capabilities]
@@ -237,7 +298,15 @@ Use this structure unless the user asks for a different format:
 
 ## Rollout and rollback
 - [Release shape]
+- [Code rollback]
+- [State rollback]
 - [Rollback limits]
+
+## Evidence ledger
+- Evidence:
+- Assumptions:
+- Blockers:
+- Recommendations:
 
 ## Open risks
 - [Remaining concerns or blockers]
@@ -255,5 +324,12 @@ Use this structure unless the user asks for a different format:
   when you need detailed Cloudflare product guidance, maturity-level stack
   selection, or platform-specific footguns.
 - Read [references/cloudflare-current-stack.md](references/cloudflare-current-stack.md)
-  when you need the latest recommended Cloudflare product choices and safe
-  defaults for "build in prod" workflows.
+  when you need current recommended Cloudflare product choices and safe
+  defaults for "build in prod" workflows. Its snapshot date is April 23, 2026.
+- Read [references/evidence-ledger.md](references/evidence-ledger.md) when
+  recommendations need an auditable evidence trail.
+- Read [references/fail-closed-scenarios.md](references/fail-closed-scenarios.md)
+  when a missing capability must map to continue, planning-only, preview-only,
+  handoff, or hard block.
+- Read [references/source-freshness.md](references/source-freshness.md) before
+  presenting recently changing Cloudflare behavior as current fact.

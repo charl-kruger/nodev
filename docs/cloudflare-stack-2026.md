@@ -1,6 +1,6 @@
 # Recommended Cloudflare Stack (April 2026)
 
-This is the current Cloudflare stack `charl` should bias toward when the goal
+This is the current Cloudflare stack `nodev` should bias toward when the goal
 is to let humans or autonomous agents build quickly without being careless in
 production.
 
@@ -210,7 +210,7 @@ These are the ones worth remembering:
 - Sandboxes should not get raw credentials if outbound Workers can inject them.
 - Not every code-execution task needs Sandbox; Dynamic Workers are often better.
 
-## What Charl Should Recommend By Default
+## What Nodev Should Recommend By Default
 
 If the skill is asked for a current best-practice stack, the answer should
 usually be:

@@ -1,7 +1,7 @@
 {
-  "name": "charl",
+  "name": "nodev",
   "version": "0.1.0",
-  "description": "Skill for planning and reviewing safe production delivery of AI-authored Cloudflare changes on Cloudflare",
+  "description": "Nodev skill for planning and reviewing safe production delivery of AI-authored Cloudflare changes",
   "author": {
     "name": "Charl Kruger"
   },

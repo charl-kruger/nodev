@@ -1,6 +1,17 @@
 # Common Workflows
 
-This document shows what `charl` looks like when used well.
+This document shows what `nodev` looks like when used well.
+
+## New In This Version
+
+- Small reviews can use Quick Review instead of the full release template.
+- Tier 1+ release work and remote/autonomous work include an evidence ledger.
+- Unknown mode supports planning-only output, while implementation and
+  promotion stay blocked.
+- Missing preview, telemetry, state rollback, token scope, ZDR, or Browser Run
+  recording assumptions map to explicit fail-closed outcomes.
+- Codex implementation briefs can turn a Nodev decision into exact file edits,
+  acceptance criteria, and validation commands.
 
 ## Workflow 1: Human On A Laptop Shipping A Small Workers Feature
 
@@ -10,7 +21,7 @@ Mode:
 
 Typical request:
 
-- "Use `$charl` to review a Tier 1 Workers feature before production."
+- "Use `$nodev` to review a Tier 1 Workers feature before production."
 
 What the skill should do:
 
@@ -33,7 +44,7 @@ Mode:
 
 Typical request:
 
-- "Use `$charl` to decide what this sandboxed agent can do before handing off to
+- "Use `$nodev` to decide what this sandboxed agent can do before handing off to
   a human for release."
 
 What the skill should do:
@@ -56,7 +67,7 @@ Mode:
 
 Typical request:
 
-- "Use `$charl` to tell me whether this unattended agent can deploy or must
+- "Use `$nodev` to tell me whether this unattended agent can deploy or must
   stop after preview."
 
 What the skill should do:
@@ -79,7 +90,7 @@ Mode:
 
 Typical request:
 
-- "Use `$charl` to govern a progressive rollout for this AI-authored feature."
+- "Use `$nodev` to govern a progressive rollout for this AI-authored feature."
 
 What the skill should do:
 
@@ -101,7 +112,7 @@ Mode:
 
 Typical request:
 
-- "Use `$charl` to assess an auth, billing, or shared schema change."
+- "Use `$nodev` to assess an auth, billing, or shared schema change."
 
 What the skill should do:
 
@@ -115,9 +126,30 @@ Why this is useful:
 
 - it makes "no" operationally useful instead of merely conservative
 
-## The Pattern Behind All Five
+## Workflow 6: Codex Implementation Brief
 
-The best use of `charl` is not "tell me what to do."
+Mode:
+
+- any mode, with implementation still constrained by authority
+
+Typical request:
+
+- "Use `$nodev` to create an implementation brief for another Codex agent."
+
+What the skill should do:
+
+1. State the execution mode and any planning-only boundary
+2. List files to edit and exact expected changes
+3. Include acceptance criteria and validation commands
+4. Include evidence, assumptions, blockers, and handoff requirements
+
+Why this is useful:
+
+- it lets another agent implement without inheriting hidden release authority
+
+## The Pattern Behind All Six
+
+The best use of `nodev` is not "tell me what to do."
 
 It is:
 
