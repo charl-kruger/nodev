@@ -104,27 +104,27 @@ Read more:
 Public repo:
 
 ```bash
-npx skills add https://github.com/charl-kruger/skills
+npx skills add charl-kruger/nodev
 ```
 
 Install the skill by name:
 
 ```bash
-npx skills add https://github.com/charl-kruger/skills --skill nodev
+npx skills add https://github.com/charl-kruger/nodev.git --skill nodev
 ```
 
 Manual project-level install:
 
 ```bash
-mkdir -p /path/to/project/.agents/skills
-cp -R skills/nodev /path/to/project/.agents/skills/
+mkdir -p /path/to/project/.agents/skills/nodev
+cp -R SKILL.md references examples agents /path/to/project/.agents/skills/nodev/
 ```
 
 Manual OpenAI Codex global install:
 
 ```bash
-mkdir -p ~/.codex/skills
-cp -R skills/nodev ~/.codex/skills/
+mkdir -p ~/.codex/skills/nodev
+cp -R SKILL.md references examples agents ~/.codex/skills/nodev/
 ```
 
 For other agents, use `npx skills` or the client’s own skills directory docs.
@@ -201,19 +201,22 @@ Start here if you are new:
 
 Internal skill and command files:
 
-- [skills/nodev/SKILL.md](./skills/nodev/SKILL.md)
-- [skills/nodev/references/playbook.md](./skills/nodev/references/playbook.md)
-- [skills/nodev/references/cloudflare-tooling.md](./skills/nodev/references/cloudflare-tooling.md)
-- [skills/nodev/references/evidence-ledger.md](./skills/nodev/references/evidence-ledger.md)
-- [skills/nodev/references/fail-closed-scenarios.md](./skills/nodev/references/fail-closed-scenarios.md)
-- [skills/nodev/references/source-freshness.md](./skills/nodev/references/source-freshness.md)
-- [skills/nodev/examples/golden-cases.md](./skills/nodev/examples/golden-cases.md)
+- [SKILL.md](./SKILL.md)
+- [references/playbook.md](./references/playbook.md)
+- [references/cloudflare-tooling.md](./references/cloudflare-tooling.md)
+- [references/evidence-ledger.md](./references/evidence-ledger.md)
+- [references/fail-closed-scenarios.md](./references/fail-closed-scenarios.md)
+- [references/source-freshness.md](./references/source-freshness.md)
+- [examples/golden-cases.md](./examples/golden-cases.md)
 - [commands/nodev.md](./commands/nodev.md)
 - [`.claude/commands/nodev.md`](./.claude/commands/nodev.md)
 
 ## Repository Layout
 
-- [`skills/nodev/`](./skills/nodev/)
+- [`SKILL.md`](./SKILL.md)
+- [`references/`](./references/)
+- [`examples/`](./examples/)
+- [`agents/`](./agents/)
 - [`docs/`](./docs/)
 - [`commands/`](./commands/)
 - [`.claude/commands/`](./.claude/commands/)
@@ -222,8 +225,9 @@ Internal skill and command files:
 
 ## Notes
 
-- The repo is intentionally laid out like a published skill catalog, with a
-  top-level `skills/` directory.
+- The repo is intentionally laid out as a single published skill, with
+  `SKILL.md` at the repository root so `npx skills add charl-kruger/nodev`
+  can discover it directly.
 - The install target for many project-local agent environments is still
   `.agents/skills/`.
 - `agents/openai.yaml` is optional UI metadata for OpenAI/Codex-style clients.

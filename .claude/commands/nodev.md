@@ -8,23 +8,23 @@ Use the Nodev skill for this request: $ARGUMENTS
 
 Start by reading:
 
-- @skills/nodev/SKILL.md
-- @skills/nodev/references/playbook.md when the task needs execution modes,
+- @SKILL.md
+- @references/playbook.md when the task needs execution modes,
   risk tiers, authority matrix, verification, rollout policy, handoff, or red
   flags
-- @skills/nodev/references/cloudflare-tooling.md when the task needs detailed
+- @references/cloudflare-tooling.md when the task needs detailed
   Cloudflare product guidance, release controls, storage, observability,
   security controls, agent runtime, browser verification, or sandboxing
-- @skills/nodev/references/cloudflare-current-stack.md when the task needs
+- @references/cloudflare-current-stack.md when the task needs
   latest/current Cloudflare-safe defaults for build, preview, AI routing,
   Browser Run, Dynamic Workers, Sandbox, Agents SDK, or MCP governance
-- @skills/nodev/references/evidence-ledger.md for Tier 1+ release work,
+- @references/evidence-ledger.md for Tier 1+ release work,
   remote/autonomous operators, production exposure, or any recommendation that
   says work may continue
-- @skills/nodev/references/fail-closed-scenarios.md when authority, telemetry,
+- @references/fail-closed-scenarios.md when authority, telemetry,
   preview, rollback, token scope, ZDR, Browser Run recording, or Durable Object
   Preview URL assumptions are unclear
-- @skills/nodev/references/source-freshness.md when a current Cloudflare fact,
+- @references/source-freshness.md when a current Cloudflare fact,
   security/compliance claim, limit, pricing, availability, API, beta status, or
   documented constraint materially affects the answer
 

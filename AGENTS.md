@@ -9,12 +9,12 @@ Cloudflare delivery.
 
 Read:
 
-1. `skills/nodev/SKILL.md`
-2. `skills/nodev/references/playbook.md` for operating model, risk tiers,
+1. `SKILL.md`
+2. `references/playbook.md` for operating model, risk tiers,
    rollout, and handoff policy
-3. `skills/nodev/references/cloudflare-tooling.md` for Cloudflare
+3. `references/cloudflare-tooling.md` for Cloudflare
    product/control guidance
-4. `skills/nodev/references/cloudflare-current-stack.md` only when current
+4. `references/cloudflare-current-stack.md` only when current
    Cloudflare-safe defaults matter
 
 ## Editing Rules

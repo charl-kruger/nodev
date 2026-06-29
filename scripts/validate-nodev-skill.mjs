@@ -122,7 +122,7 @@ function extractMarkdownReferenceTargets(skillContent) {
  */
 function validateCommandFile(commandContent, label) {
   requireIncludes(commandContent, label, [
-    "skills/nodev/SKILL.md",
+    "SKILL.md",
     "evidence-ledger.md",
     "fail-closed-scenarios.md",
     "source-freshness.md",
@@ -133,15 +133,20 @@ function validateCommandFile(commandContent, label) {
   if (commandContent.includes("-5.")) {
     failures.push(`${label} contains malformed numbering "-5."`);
   }
+
+  if (/(^|[\s([`])skills\/nodev(\/|[\s)`\]])/.test(commandContent)) {
+    failures.push(`${label} must use top-level SKILL.md and references, not skills/nodev.`);
+  }
 }
 
 /** @type {RequiredFile[]} */
 const requiredFiles = [
-  { path: "skills/nodev/SKILL.md", label: "SKILL.md" },
-  { path: "skills/nodev/references/fail-closed-scenarios.md", label: "fail-closed scenarios" },
-  { path: "skills/nodev/references/evidence-ledger.md", label: "evidence ledger" },
-  { path: "skills/nodev/references/source-freshness.md", label: "source freshness" },
-  { path: "skills/nodev/examples/golden-cases.md", label: "golden cases" },
+  { path: "SKILL.md", label: "SKILL.md" },
+  { path: "references/fail-closed-scenarios.md", label: "fail-closed scenarios" },
+  { path: "references/evidence-ledger.md", label: "evidence ledger" },
+  { path: "references/source-freshness.md", label: "source freshness" },
+  { path: "examples/golden-cases.md", label: "golden cases" },
+  { path: "agents/openai.yaml", label: "OpenAI metadata" },
   { path: "commands/nodev.md", label: "commands/nodev.md" },
   { path: ".claude/commands/nodev.md", label: ".claude/commands/nodev.md" },
 ];
@@ -152,7 +157,7 @@ for (const file of requiredFiles) {
   }
 }
 
-const skillContent = readRequiredFile("skills/nodev/SKILL.md");
+const skillContent = readRequiredFile("SKILL.md");
 const frontmatter = parseFrontmatter(skillContent);
 
 if (frontmatter.name !== "nodev") {
@@ -188,7 +193,7 @@ requireIncludes(skillContent, "SKILL.md", [
 ]);
 
 for (const target of extractMarkdownReferenceTargets(skillContent)) {
-  const normalizedTarget = normalize(join("skills/nodev", target));
+  const normalizedTarget = normalize(target);
   if (!existsSync(absolutePath(normalizedTarget))) {
     failures.push(`SKILL.md references missing file: ${normalizedTarget}`);
   }
@@ -199,7 +204,7 @@ const claudeCommandContent = readRequiredFile(".claude/commands/nodev.md");
 validateCommandFile(commandContent, "commands/nodev.md");
 validateCommandFile(claudeCommandContent, ".claude/commands/nodev.md");
 
-const goldenCasesContent = readRequiredFile("skills/nodev/examples/golden-cases.md");
+const goldenCasesContent = readRequiredFile("examples/golden-cases.md");
 requireIncludes(goldenCasesContent, "golden-cases.md", [
   "## 1. Unknown Mode, Rollout Design",
   "## 2. Leaf UI With Billing Side Effect",
@@ -211,6 +216,21 @@ requireIncludes(goldenCasesContent, "golden-cases.md", [
   "## 8. Generic Coding Question",
   "Must not do:",
 ]);
+
+const readmeContent = readRequiredFile("README.md");
+requireIncludes(readmeContent, "README.md", [
+  "npx skills add charl-kruger/nodev",
+  "SKILL.md",
+  "references/",
+]);
+
+if (readmeContent.includes("charl-kruger/skills")) {
+  failures.push("README.md must not point installs at charl-kruger/skills.");
+}
+
+if (/(^|[\s([`])skills\/nodev(\/|[\s)`\]])/.test(readmeContent)) {
+  failures.push("README.md must describe the top-level skill layout, not skills/nodev.");
+}
 
 if (failures.length > 0) {
   console.error("Nodev skill validation failed:");

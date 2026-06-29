@@ -14,26 +14,26 @@ The user invoked this command with: $ARGUMENTS
 
 When this command is invoked:
 
-1. Read `skills/nodev/SKILL.md` first.
+1. Read `SKILL.md` first.
 2. Apply the skill's When To Use and When Not To Use rules. For generic coding
    help without release safety, Cloudflare controls, autonomous agents, or
    production readiness, do not force the full release template.
-3. Read `skills/nodev/references/playbook.md` when you need execution modes,
+3. Read `references/playbook.md` when you need execution modes,
    risk tiers, AI change package, authority matrix, review focus, rollout,
    handoff, go-live checklist, or red flags.
-4. Read `skills/nodev/references/cloudflare-tooling.md` when you need detailed
+4. Read `references/cloudflare-tooling.md` when you need detailed
    Cloudflare control selection, release patterns, storage choices, security
    controls, agent runtime, browser verification, sandboxing, or footguns.
-5. Read `skills/nodev/references/cloudflare-current-stack.md` when you need
+5. Read `references/cloudflare-current-stack.md` when you need
    latest/current Cloudflare-safe defaults for build, preview, AI routing,
    Browser Run, Dynamic Workers, Sandbox, Agents SDK, or MCP governance.
-6. Read `skills/nodev/references/evidence-ledger.md` for Tier 1+ release work,
+6. Read `references/evidence-ledger.md` for Tier 1+ release work,
    remote/autonomous operators, production exposure, or any recommendation that
    says work may continue.
-7. Read `skills/nodev/references/fail-closed-scenarios.md` when authority,
+7. Read `references/fail-closed-scenarios.md` when authority,
    telemetry, preview, rollback, token scope, ZDR, Browser Run recording, or
    Durable Object Preview URL assumptions are unclear.
-8. Read `skills/nodev/references/source-freshness.md` when a current Cloudflare
+8. Read `references/source-freshness.md` when a current Cloudflare
    fact, security/compliance claim, limit, pricing, availability, API, beta
    status, or documented constraint materially affects the answer.
 9. Detect the execution mode first: `human-local`, `human-remote`,

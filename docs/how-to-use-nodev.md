@@ -23,27 +23,27 @@ the full internal `SKILL.md` first.
 Public repository:
 
 ```bash
-npx skills add https://github.com/charl-kruger/skills
+npx skills add charl-kruger/nodev
 ```
 
 Install the named skill explicitly:
 
 ```bash
-npx skills add https://github.com/charl-kruger/skills --skill nodev
+npx skills add https://github.com/charl-kruger/nodev.git --skill nodev
 ```
 
 Manual project-level install:
 
 ```bash
-mkdir -p /path/to/project/.agents/skills
-cp -R skills/nodev /path/to/project/.agents/skills/
+mkdir -p /path/to/project/.agents/skills/nodev
+cp -R SKILL.md references examples agents /path/to/project/.agents/skills/nodev/
 ```
 
 Manual Codex global install:
 
 ```bash
-mkdir -p ~/.codex/skills
-cp -R skills/nodev ~/.codex/skills/
+mkdir -p ~/.codex/skills/nodev
+cp -R SKILL.md references examples agents ~/.codex/skills/nodev/
 ```
 
 ## Use As A Skill
