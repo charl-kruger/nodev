@@ -67,6 +67,9 @@ function parseFrontmatter(content) {
 
     const key = line.slice(0, separatorIndex).trim();
     const value = line.slice(separatorIndex + 1).trim();
+    if (key === "description" && value.includes(": ") && !/^["'].*["']$/.test(value)) {
+      failures.push("Frontmatter description must be quoted when it contains a colon.");
+    }
     fields.set(key, value);
   }
 
@@ -82,9 +85,25 @@ function parseFrontmatter(content) {
   }
 
   return {
-    name: typeof name === "string" ? name : "",
-    description: typeof description === "string" ? description : "",
+    name: typeof name === "string" ? stripYamlQuotes(name) : "",
+    description: typeof description === "string" ? stripYamlQuotes(description) : "",
   };
+}
+
+/**
+ * @param {string} value
+ * @returns {string}
+ */
+function stripYamlQuotes(value) {
+  const trimmed = value.trim();
+  if (
+    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1);
+  }
+
+  return trimmed;
 }
 
 /**

@@ -1,6 +1,6 @@
 ---
 name: nodev
-description: Use for safe AI-authored Cloudflare delivery: production rollout plans, risk tiering, blast radius analysis, preview/staging verification, deploy authority, rollback, observability, AI Gateway, Workers, Pages, D1, Durable Objects, Queues, Workflows, Sandbox, Browser Run, Access, and MCP governance. Do not use for generic coding help unless release safety, Cloudflare controls, autonomous agents, or production readiness matter.
+description: "Use for safe AI-authored Cloudflare delivery: production rollout plans, risk tiering, blast radius analysis, preview/staging verification, deploy authority, rollback, observability, AI Gateway, Workers, Pages, D1, Durable Objects, Queues, Workflows, Sandbox, Browser Run, Access, and MCP governance. Do not use for generic coding help unless release safety, Cloudflare controls, autonomous agents, or production readiness matter."
 ---
 
 # Nodev
